@@ -6,7 +6,7 @@ import (
 )
 
 func TestPush(t *testing.T) {
-    stack := Stack{head: nil, Length: 0}
+    stack := Stack{}
     stack.Push('a')
     stack.Push('b')
     if stack.Length != 2 || stack.head.data != 'b' {
@@ -15,7 +15,7 @@ func TestPush(t *testing.T) {
 }
 
 func TestPop(t *testing.T) {
-    stack := Stack{head: nil, Length: 0}
+    stack := Stack{}
     stack.Push('a')
     stack.Push('b')
     stack.Push('c')

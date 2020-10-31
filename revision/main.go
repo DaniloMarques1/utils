@@ -66,7 +66,7 @@ func main() {
         return
     }
 
-    stack := Stack{head: nil, Length: 0}
+    stack := Stack{}
     lines, err := ioutil.ReadFile(filePath)
 
     s := ""
