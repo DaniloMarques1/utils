@@ -17,7 +17,7 @@ Just call on me and **I'll send it along**
 * Paul
 * George
 * Ringo
-* John
+* **John**
 ```
 
 will generate the following file
@@ -27,4 +27,5 @@ call on
 you want
 I'll send it along
 With love
+John
 ```
