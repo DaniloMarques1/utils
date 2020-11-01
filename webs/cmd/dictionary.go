@@ -17,11 +17,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-    "fmt"
-    "os"
-    "os/exec"
-    "strings"
-
+    "webs/service"
 )
 
 // dictionaryCmd represents the dictionary command
@@ -35,20 +31,9 @@ var dictionaryCmd = &cobra.Command{
         portuguese word.
     `,
 	Run: func(cmd *cobra.Command, args []string) {
-        SearchDictionary(args)
+        const url string = "https://www.dicio.com.br/"
+        service.SearchTheWeb("dictionary", url, args)
 	},
-}
-
-func SearchDictionary(args []string) {
-    const url string = "https://www.dicio.com.br/"
-    if len(args) < 1 {
-        fmt.Println("You need to give something to search for")
-        os.Exit(1)
-    }
-    fmt.Println("searching web....")
-    searchString := strings.Join(args, " ")
-    searchString = strings.Replace(searchString, " ", "-", strings.Count(searchString, " "))
-    exec.Command("firefox", url + strings.ToLower(searchString)).Start()
 }
 
 /*

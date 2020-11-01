@@ -20,31 +20,30 @@ import (
     "webs/service"
 )
 
-// duckduckgoCmd represents the duckduckgo command
-var duckduckgoCmd = &cobra.Command{
-	Use:   "duckduckgo",
-    Aliases: []string{"duc"},
-	Short: "It will make a search of the argument passed to duckduckgo",
+// youtubeCmd represents the youtube command
+var youtubeCmd = &cobra.Command{
+	Use:   "youtube",
+    Aliases: []string {"yt"},
+	Short: "Will make a youtube search",
 	Long: `
-      It will grab everything passed as argument and search using the
-      duckduckgo search engine
+        I will search on youtube the passed string
     `,
 	Run: func(cmd *cobra.Command, args []string) {
-        const url string = "https://duckduckgo.com/?q="
-        service.SearchTheWeb("duckduckgo", url, args)
+        const url string = "https://youtube.com/results?search_query="
+        service.SearchTheWeb("youtube", url, args)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(duckduckgoCmd)
+	rootCmd.AddCommand(youtubeCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// duckduckgoCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// youtubeCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// duckduckgoCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// youtubeCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
