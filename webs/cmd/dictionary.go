@@ -32,7 +32,7 @@ var dictionaryCmd = &cobra.Command{
     `,
 	Run: func(cmd *cobra.Command, args []string) {
         const url string = "https://www.dicio.com.br/"
-        service.SearchTheWeb("dictionary", url, args)
+        service.SearchTheWeb("dictionary", url, args, NewWindow)
 	},
 }
 

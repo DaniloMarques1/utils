@@ -31,7 +31,7 @@ var duckduckgoCmd = &cobra.Command{
     `,
 	Run: func(cmd *cobra.Command, args []string) {
         const url string = "https://duckduckgo.com/?q="
-        service.SearchTheWeb("duckduckgo", url, args)
+        service.SearchTheWeb("duckduckgo", url, args, NewWindow)
 	},
 }
 

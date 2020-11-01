@@ -7,13 +7,20 @@ import (
     "strings"
 )
 
-func SearchTheWeb(command string, url string, args []string) {
+func SearchTheWeb(command string, url string, args []string, newWindow bool) {
     if len(args) < 1 {
         fmt.Println("You need to pass a argument to complete the search")
         os.Exit(1)
     }
     searchString := getSearchString(command, args)
-    exec.Command("firefox", "--new-tab", url + searchString).Start()
+    var argumentToCommand string
+    if newWindow {
+        argumentToCommand = "--new-window"
+    } else {
+        argumentToCommand = "--new-tab"
+    }
+
+    exec.Command("firefox", argumentToCommand, url + searchString).Start()
 }
 
 func getSearchString(command string, args []string) string {

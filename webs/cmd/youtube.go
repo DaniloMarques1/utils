@@ -30,7 +30,7 @@ var youtubeCmd = &cobra.Command{
     `,
 	Run: func(cmd *cobra.Command, args []string) {
         const url string = "https://youtube.com/results?search_query="
-        service.SearchTheWeb("youtube", url, args)
+        service.SearchTheWeb("youtube", url, args, NewWindow)
 	},
 }
 
