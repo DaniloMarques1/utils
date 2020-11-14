@@ -84,6 +84,7 @@ func main() {
 					stack = Stack{nil, 0}
 					bcurrent = append(bcurrent, '\n')
 					b = append(b, bcurrent...)
+					bcurrent = make([]byte, 0)
 				} else {
 					// if '*' was used to do something other than bolding a word
 					stack.Pop()
