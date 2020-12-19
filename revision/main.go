@@ -66,7 +66,7 @@ func main() {
 		return
 	}
 
-	stack := Stack{}
+	var stack Stack
 	lines, err := ioutil.ReadFile(filePath)
 
 	// all bold words

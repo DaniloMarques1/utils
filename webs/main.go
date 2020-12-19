@@ -1,9 +1,9 @@
 package main
 
 import (
-    "webs/cmd"
+	"webs/cmd"
 )
 
 func main() {
-    cmd.Execute()
+	cmd.Execute()
 }
