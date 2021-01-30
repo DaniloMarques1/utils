@@ -17,6 +17,7 @@ type Stack struct {
 	Length int
 }
 
+// pushes a new element to the stack
 func (s *Stack) Push(element byte) {
 	node := Node{data: element, next: nil}
 	if s.head != nil {
@@ -27,6 +28,7 @@ func (s *Stack) Push(element byte) {
 	s.Length++
 }
 
+// removes the last added element from the stack
 func (s *Stack) Pop() {
 	if s.head != nil {
 		temp := s.head.next
@@ -35,23 +37,24 @@ func (s *Stack) Pop() {
 	}
 }
 
-// receives the byte array that will write to the revision file
-func WriteToRevisionFile(b []byte) {
-	file, err := os.Create("revision")
-	if err == nil {
-		defer file.Close()
-		file.Write(b)
+// receives the byte slice that and write its content to a file
+// with the filename given
+func writeToRevisionFile(b []byte, filename string) error {
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
 	}
+	defer file.Close()
+	file.Write(b)
+
+	return nil
 }
 
-func GetFilePath() (string, error) {
-	if len(os.Args) < 2 {
-		return "", errors.New("You need to pass a file")
-	}
-
-	fileName := os.Args[1]
+// return the working dir concatened to the file passed
+// in the command line
+func getFullPath(fileName string) (string, error) {
+	//from where i am calling the program
 	workingDir, err := os.Getwd()
-
 	if err != nil {
 		return "", errors.New("Invalid working dir")
 	}
@@ -59,23 +62,44 @@ func GetFilePath() (string, error) {
 	return workingDir + "/" + fileName, nil
 }
 
+// returns the file name given in the command line
+func getFileName() (string, error) {
+	if len(os.Args) < 2 {
+		return "", errors.New("You need to pass the name of one file")
+	}
+	fileName := os.Args[1]
+
+	return fileName, nil
+}
+
 func main() {
-	filePath, err := GetFilePath()
+	fileName, err := getFileName()
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("Error getting filename %v\n", err)
+		return
+	}
+
+	filePath, err := getFullPath(fileName)
+	if err != nil {
+		fmt.Printf("Error getting working dir %v\n", err)
 		return
 	}
 
 	var stack Stack
 	lines, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		fmt.Printf("Error reading markdown file")
+		return
+	}
 
+	//TODO modularize
 	// all bold words
 	var b []byte
 	if err == nil {
 		// a line of bold chars
 		var bcurrent []byte
 		for _, char := range lines {
-			if string(char) == "*" {
+			if char == '*' {
 				stack.Push(char)
 			} else {
 				if stack.Length == 2 {
@@ -92,6 +116,6 @@ func main() {
 			}
 		}
 
-		WriteToRevisionFile(b)
+		writeToRevisionFile(b, "revision")
 	}
 }
