@@ -3,8 +3,8 @@ package main
 import (
 	"io/ioutil"
 	"os"
-	"testing"
 	"strings"
+	"testing"
 )
 
 func TestStackPush(t *testing.T) {

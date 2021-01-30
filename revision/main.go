@@ -54,7 +54,7 @@ func writeToRevisionFile(strSlice []string, filename string) error {
 	}
 	defer file.Close()
 	for idx, str := range strSlice {
-		if idx == len(strSlice) - 1{
+		if idx == len(strSlice)-1 {
 			// do not add new line to last line
 			file.WriteString(str)
 		} else {
